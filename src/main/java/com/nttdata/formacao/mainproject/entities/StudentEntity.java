@@ -13,8 +13,8 @@ import javax.persistence.*;
 public class StudentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "registration_number", nullable = false, length = 8, unique = true)
     private String registrationNumber;

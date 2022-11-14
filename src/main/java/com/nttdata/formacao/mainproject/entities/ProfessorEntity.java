@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class ProfessorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "cc", nullable = false, unique = true, length = 9)

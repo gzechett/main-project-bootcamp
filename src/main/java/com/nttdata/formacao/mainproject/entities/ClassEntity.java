@@ -16,8 +16,8 @@ import java.util.Date;
 public class ClassEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "date", nullable = false)
     private Date date;
@@ -35,10 +35,10 @@ public class ClassEntity {
     private String result;
 
     @ManyToOne
-    @Column(name = "student_id", nullable = false)
+    @JoinColumn(name = "student_id", nullable = false)
     private StudentEntity student;
 
     @ManyToOne
-    @Column(name = "professor_id", nullable = false)
+    @JoinColumn(name = "professor_id", nullable = false)
     private ProfessorEntity professor;
 }
