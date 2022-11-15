@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,4 +40,7 @@ public class ProfessorEntity {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private CourseEntity course;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private List<ClassEntity> classList;
 }

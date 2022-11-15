@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +23,7 @@ public class CourseEntity {
 
     @Column(name = "area", nullable = false)
     private String area;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private List<ProfessorEntity> professorList;
 }

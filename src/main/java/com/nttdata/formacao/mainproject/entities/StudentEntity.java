@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,4 +31,7 @@ public class StudentEntity {
 
     @Column(name = "age", nullable = false)
     private Integer age;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private List<ClassEntity> classList;
 }
