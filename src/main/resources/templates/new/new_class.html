@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Class</title>
+</head>
+<body>
+<div>
+  <h1> New Class</h1>
+  <br/>
+  <form action="#" th:action="@{/save/class}" th:object="${class}" method="post">
+    <table border="0" cellpadding="10">
+      <tr>
+        <td>Student Id</td>
+        <td>
+          <input type="text" th:field="*{student.id}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Professor Id</td>
+        <td>
+          <input type="text" th:field="*{professor.id}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>
+          <input type="date" th:field="*{date}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Duration (Min)</td>
+        <td>
+          <input type="text" th:field="*{duration}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Value</td>
+        <td>
+          <input type="text" th:field="*{value}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Average</td>
+        <td>
+          <input type="text" th:field="*{average}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Result</td>
+        <td>
+          <select th:field="*{result}">
+            <option
+                    th:value="Approved"
+                    th:text="Approved">
+            </option>
+            <option
+                    th:value="Refused"
+                    th:text="Refused">
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit">Save</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

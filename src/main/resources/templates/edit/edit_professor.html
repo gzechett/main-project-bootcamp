@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Professor</title>
+</head>
+<body>
+<div>
+  <h1> Edit Professor</h1>
+  <br/>
+  <form action="#" th:action="@{/save/professor}" th:object="${professor}" method="post">
+    <table border="0" cellpadding="10">
+      <tr>
+        <td>Professor Id</td>
+        <td>
+          <input type="text" th:field="*{id}" readonly="readonly"/>
+        </td>
+      </tr>
+      <tr>
+      <tr>
+        <td>Professor Name</td>
+        <td>
+          <input type="text" th:field="*{name}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Professor Age</td>
+        <td>
+          <input type="text" th:field="*{age}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>CC</td>
+        <td>
+          <input type="text" th:field="*{cc}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Professor Gender</td>
+        <td>
+          <select th:field="*{gender}">
+            <option
+                    th:value="M"
+                    th:text="Male">
+            </option>
+            <option
+                    th:value="F"
+                    th:text="Female">
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Teaching Time</td>
+        <td>
+          <input type="text" th:field="*{teachingTime}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Salary</td>
+        <td>
+          <input type="text" th:field="*{salary}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Course</td>
+        <td>
+<!--          <input type="text" th:field="*{course.id}"/>-->
+          <select th:field="*{course.id}">
+            <option
+                    th:each="course : ${courseList}"
+                    th:value="${course.id}"
+                    th:text="${course.name}">
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit">Save</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>
