@@ -6,6 +6,9 @@
     <title>School</title>
 </head>
 <body>
+<div align="right">
+    <a href="/connect">Add a Student</a>
+</div>
 <div>
     <h1>Students List</h1>
     <a href="/new/student">Add a Student</a>
@@ -18,6 +21,7 @@
             <th>Registration Number</th>
             <th>CC</th>
             <th>Gender</th>
+            <th>School Year</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +31,7 @@
             <td th:text="${student.registrationNumber}">Registration Number</td>
             <td th:text="${student.cc}">Student CC</td>
             <td th:text="${student.gender}">Student Gender</td>
+            <td th:text="${student.schoolYear}">School Year</td>
             <td>
                 <a th:href="@{'/edit/student/' + ${student.id}}">Edit Student</a>
                 <a th:href="@{'/delete/student/' + ${student.id}}">Delete Student</a>

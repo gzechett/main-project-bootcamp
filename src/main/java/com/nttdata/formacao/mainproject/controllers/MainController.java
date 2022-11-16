@@ -9,18 +9,23 @@ import com.nttdata.formacao.mainproject.services.interfaces.IClassService;
 import com.nttdata.formacao.mainproject.services.interfaces.ICourseService;
 import com.nttdata.formacao.mainproject.services.interfaces.IProfessorService;
 import com.nttdata.formacao.mainproject.services.interfaces.IStudentService;
+import com.nttdata.formacao.mainproject.validators.CourseValidator;
+import com.nttdata.formacao.mainproject.validators.StudentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -37,6 +42,12 @@ public class MainController {
 
     @Autowired
     private IClassService classService;
+
+    @Autowired
+    private StudentValidator studentValidator;
+
+    @Autowired
+    private CourseValidator courseValidator;
 
 
     @RequestMapping("/")
@@ -59,6 +70,7 @@ public class MainController {
     //-------------Student-----------------------------------------------
     @RequestMapping("/save/student")
     public String saveStudent(@ModelAttribute("student") StudentEntity student) {
+        studentValidator.validateSchoolYear(student);
         studentService.addStudent(student);
         return "redirect:/";
     }
@@ -66,6 +78,9 @@ public class MainController {
     public String addStudent(Model model){
         StudentEntity student = new StudentEntity();
         model.addAttribute("student", student);
+        model.addAttribute("schoolYearList", new ArrayList<String>(Arrays.asList(
+                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
+        )));
         return "/new/new_student";
     }
     @RequestMapping("/edit/student/{id}")
@@ -73,6 +88,9 @@ public class MainController {
         ModelAndView mav = new ModelAndView("edit/edit_student");
         StudentEntity student = studentService.getStudent(id);
         mav.addObject("student",student);
+        mav.addObject("schoolYearList", new ArrayList<String>(Arrays.asList(
+                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
+        )));
         return mav;
     }
     @RequestMapping("/delete/student/{id}")
@@ -90,6 +108,7 @@ public class MainController {
 
     @RequestMapping("/save/course")
     public String saveCourse(@ModelAttribute("course") CourseEntity course) {
+        courseValidator.validateCourse(course);
         courseService.addCourse(course);
         return "redirect:/";
     }
@@ -174,6 +193,19 @@ public class MainController {
         return mav;
     }
 
+
+    @RequestMapping("/connect")
+    public String connectApi() {
+        WebClient webClient = WebClient.create("http://localhost:8082");
+        List<CourseEntity> courses = webClient.get().uri("/courses").retrieve().bodyToFlux(CourseEntity.class).collectList().block();
+
+        WebClient webClient2 = WebClient.create("http://localhost:8082");
+        List<StudentEntity> studentList = webClient.get().uri("/validate/educational-year/" + 6).retrieve().bodyToFlux(StudentEntity.class).collectList().block();
+        System.out.println("aaaa");
+
+        return null;
+    }
+
     @PostConstruct
     public void callMethodsToTestServices() {
 
@@ -191,6 +223,7 @@ public class MainController {
         student.setRegistrationNumber("00000001");
         student.setAge(12);
         student.setGender("M");
+        student.setSchoolYear("1st");
         studentService.addStudent(student);
         System.out.println("Student added");
 

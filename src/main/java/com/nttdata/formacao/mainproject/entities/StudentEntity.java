@@ -32,6 +32,9 @@ public class StudentEntity {
     @Column(name = "age", nullable = false)
     private Integer age;
 
+    @Column(name="educational_year", nullable = false)
+    private String schoolYear;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<ClassEntity> classList;
 }
