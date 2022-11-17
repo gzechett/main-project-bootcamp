@@ -29,7 +29,7 @@ public class ClassEntity {
     private BigDecimal average;
 
     @Column(name = "duration", nullable = false)
-    private BigDecimal duration;
+    private Integer duration;
 
     @Column(name = "value", nullable = false)
     private BigDecimal value;
