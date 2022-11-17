@@ -45,13 +45,13 @@
       <tr>
         <td>Duration (Min)</td>
         <td>
-          <input type="text" th:field="*{duration}" maxlength="2" pattern="[0-6]"/>
+          <input type="text" th:field="*{duration}" maxlength="2" pattern="[0-6]{2}"/>
         </td>
       </tr>
       <tr>
         <td>Value</td>
         <td>
-          <input type="text" th:field="*{value}" maxlength="3" pattern="[0-9]"/>
+          <input type="text" th:field="*{value}" maxlength="3" pattern="[0-9/.]{1,}"/>
         </td>
       </tr>
       <tr>
