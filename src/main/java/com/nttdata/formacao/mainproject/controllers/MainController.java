@@ -72,144 +72,144 @@ public class MainController {
     }
 
     //-------------Student-----------------------------------------------
-    @RequestMapping("/student/save")
-    public String saveStudent(@ModelAttribute("student") StudentEntity student) {
-        studentValidator.validateSchoolYear(student);
-        studentService.addStudent(student);
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/student/new")
-    public String addStudent(Model model) {
-        StudentEntity student = new StudentEntity();
-        model.addAttribute("student", student);
-        model.addAttribute("schoolYearList", new ArrayList<String>(Arrays.asList(
-                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
-        )));
-        return "/new/new_student";
-    }
-
-    @RequestMapping("/student/edit/{id}")
-    public ModelAndView updateStudent(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit/edit_student");
-        StudentEntity student = studentService.getStudent(id);
-        mav.addObject("student",student);
-        mav.addObject("schoolYearList", new ArrayList<String>(Arrays.asList(
-                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
-        )));
-        return mav;
-    }
-
-    @RequestMapping("/student/delete/{id}")
-    public String deleteStudent(@PathVariable(name = "id") int id) {
-        StudentEntity student = studentService.getStudent(id);
+//    @RequestMapping("/student/save")
+//    public String saveStudent(@ModelAttribute("student") StudentEntity student) {
+//        studentValidator.validateSchoolYear(student);
+//        studentService.addStudent(student);
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/student/new")
+//    public String addStudent(Model model) {
+//        StudentEntity student = new StudentEntity();
+//        model.addAttribute("student", student);
+//        model.addAttribute("schoolYearList", new ArrayList<String>(Arrays.asList(
+//                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
+//        )));
+//        return "/new/new_student";
+//    }
+//
+//    @RequestMapping("/student/edit/{id}")
+//    public ModelAndView updateStudent(@PathVariable(name = "id") int id) {
+//        ModelAndView mav = new ModelAndView("edit/edit_student");
+//        StudentEntity student = studentService.getStudent(id);
+//        mav.addObject("student",student);
+//        mav.addObject("schoolYearList", new ArrayList<String>(Arrays.asList(
+//                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
+//        )));
+//        return mav;
+//    }
+//
+//    @RequestMapping("/student/delete/{id}")
+//    public String deleteStudent(@PathVariable(name = "id") int id) {
+//        StudentEntity student = studentService.getStudent(id);
 //        for(ClassEntity classEntity : student.getClassList()) {
 //            classService.delete(classEntity);
 //        }
-        studentService.delete(student);
-        return "redirect:/index";
-    }
+//        studentService.delete(student);
+//        return "redirect:/index";
+//    }
 
 
     //--------------------Course-----------------------------
 
-    @RequestMapping("/course/save")
-    public String saveCourse(@ModelAttribute("course") CourseEntity course) {
-        courseValidator.validateCourse(course);
-        courseService.addCourse(course);
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/course/new")
-    public String addCourse(Model model) {
-        CourseEntity course = new CourseEntity();
-        model.addAttribute("course", course);
-        return "new/new_course";
-    }
-
-    @RequestMapping("/course/delete/{id}")
-    public String deleteCourse(@PathVariable(name = "id") int id) {
-        courseService.delete(courseService.getCourse(id));
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/course/edit/{id}")
-    public ModelAndView updateCourse(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit/edit_course");
-        CourseEntity course = courseService.getCourse(id);
-        mav.addObject("course", course);
-        return mav;
-    }
+//    @RequestMapping("/course/save")
+//    public String saveCourse(@ModelAttribute("course") CourseEntity course) {
+//        courseValidator.validateCourse(course);
+//        courseService.addCourse(course);
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/course/new")
+//    public String addCourse(Model model) {
+//        CourseEntity course = new CourseEntity();
+//        model.addAttribute("course", course);
+//        return "new/new_course";
+//    }
+//
+//    @RequestMapping("/course/delete/{id}")
+//    public String deleteCourse(@PathVariable(name = "id") int id) {
+//        courseService.delete(courseService.getCourse(id));
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/course/edit/{id}")
+//    public ModelAndView updateCourse(@PathVariable(name = "id") int id) {
+//        ModelAndView mav = new ModelAndView("edit/edit_course");
+//        CourseEntity course = courseService.getCourse(id);
+//        mav.addObject("course", course);
+//        return mav;
+//    }
 
     //--------------------Professor-----------------------------
 
-    @RequestMapping("/professor/save")
-    public String saveProfessor(@ModelAttribute("professor") ProfessorEntity professor) {
-        professorService.addProfessor(professor);
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/professor/new")
-    public String addProfessor(Model model) {
-        ProfessorEntity professor = new ProfessorEntity();
-        model.addAttribute("professor", professor);
-        model.addAttribute("courseList", courseService.getAllCourses());
-        return "/new/new_professor";
-    }
-
-    @RequestMapping("/professor/delete/{id}")
-    public String deleteProfessor(@PathVariable(name = "id") int id) {
-        professorService.delete(professorService.getProfessor(id));
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/professor/edit/{id}")
-    public ModelAndView updateProfessor(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit/edit_professor");
-        ProfessorEntity professor = professorService.getProfessor(id);
-        mav.addObject("professor", professor);
-        mav.addObject("courseList", courseService.getAllCourses());
-        return mav;
-    }
+//    @RequestMapping("/professor/save")
+//    public String saveProfessor(@ModelAttribute("professor") ProfessorEntity professor) {
+//        professorService.addProfessor(professor);
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/professor/new")
+//    public String addProfessor(Model model) {
+//        ProfessorEntity professor = new ProfessorEntity();
+//        model.addAttribute("professor", professor);
+//        model.addAttribute("courseList", courseService.getAllCourses());
+//        return "/new/new_professor";
+//    }
+//
+//    @RequestMapping("/professor/delete/{id}")
+//    public String deleteProfessor(@PathVariable(name = "id") int id) {
+//        professorService.delete(professorService.getProfessor(id));
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/professor/edit/{id}")
+//    public ModelAndView updateProfessor(@PathVariable(name = "id") int id) {
+//        ModelAndView mav = new ModelAndView("edit/edit_professor");
+//        ProfessorEntity professor = professorService.getProfessor(id);
+//        mav.addObject("professor", professor);
+//        mav.addObject("courseList", courseService.getAllCourses());
+//        return mav;
+//    }
 
     //--------------------Class-----------------------------
-    @RequestMapping("/class/save")
-    public String saveClass(@ModelAttribute("class") ClassEntity classEntity) {
-        classService.addClass(classEntity);
-        return "redirect:/index";
-    }
+//    @RequestMapping("/class/save")
+//    public String saveClass(@ModelAttribute("class") ClassEntity classEntity) {
+//        classService.addClass(classEntity);
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/class/new")
+//    public String addClass(Model model) {
+//        ClassEntity classEntity = new ClassEntity();
+//        model.addAttribute("class", classEntity);
+//        model.addAttribute("studentList",studentService.getAllStudents());
+//        model.addAttribute("professorList",professorService.getAllProfessors());
+//        model.addAttribute("resultOptions",new ArrayList<String>(Arrays.asList("Approved","Refused")));
+//        return "new/new_class";
+//    }
+//
+//    @RequestMapping("/delete/class/{id}")
+//    public String deleteClass(@PathVariable(name = "id") int id) {
+//        classService.delete(classService.getClass(id));
+//        return "redirect:/index";
+//    }
+//
+//    @RequestMapping("/class/edit/{id}")
+//    public ModelAndView updateClass(@PathVariable(name = "id") int id) {
+//        ModelAndView mav = new ModelAndView("edit/edit_class");
+//        ClassEntity classEntity = classService.getClass(id);
+//        mav.addObject("class", classEntity);
+//        mav.addObject("studentList",studentService.getAllStudents());
+//        mav.addObject("professorList",professorService.getAllProfessors());
+//        return mav;
+//    }
 
-    @RequestMapping("/class/new")
-    public String addClass(Model model) {
-        ClassEntity classEntity = new ClassEntity();
-        model.addAttribute("class", classEntity);
-        model.addAttribute("studentList",studentService.getAllStudents());
-        model.addAttribute("professorList",professorService.getAllProfessors());
-        model.addAttribute("resultOptions",new ArrayList<String>(Arrays.asList("Approved","Refused")));
-        return "new/new_class";
-    }
-
-    @RequestMapping("/delete/class/{id}")
-    public String deleteClass(@PathVariable(name = "id") int id) {
-        classService.delete(classService.getClass(id));
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/class/edit/{id}")
-    public ModelAndView updateClass(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit/edit_class");
-        ClassEntity classEntity = classService.getClass(id);
-        mav.addObject("class", classEntity);
-        mav.addObject("studentList",studentService.getAllStudents());
-        mav.addObject("professorList",professorService.getAllProfessors());
-        return mav;
-    }
-
-    @RequestMapping("/login/save")
-    public String saveUser(@ModelAttribute(name = "user") UserEntity user) {
-        return null;
-    }
-
+//    @RequestMapping("/login/save")
+//    public String saveUser(@ModelAttribute(name = "user") UserEntity user) {
+//        return null;
+//    }
+//
     @RequestMapping("/")
     public String login(Model model) {
         UserEntity user = new UserEntity();
@@ -217,38 +217,38 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/user/verify")
-    public String verifyUser(@ModelAttribute(name = "user") UserEntity user){
-        if(!userService.existUser(user)){
-            return "redirect:/";
-        }
-        return "redirect:/index";
-    }
+//    @RequestMapping("/user/verify")
+//    public String verifyUser(@ModelAttribute(name = "user") UserEntity user){
+//        if(!userService.existUser(user)){
+//            return "redirect:/";
+//        }
+//        return "redirect:/index";
+//    }
 
-    @RequestMapping("/student")
-    public ModelAndView viewStudent () {
-        ModelAndView mav = new ModelAndView("view/student_view");
-        mav.addObject("studentList", studentService.getAllStudents());
-        return mav;
-    }
-    @RequestMapping("/professor")
-    public ModelAndView viewProfessor () {
-        ModelAndView mav = new ModelAndView("view/professor_view");
-        mav.addObject("professorList", professorService.getAllProfessors());
-        return mav;
-    }
-    @RequestMapping("/course")
-    public ModelAndView viewCourse () {
-        ModelAndView mav = new ModelAndView("view/course_view");
-        mav.addObject("courseList", courseService.getAllCourses());
-        return mav;
-    }
-    @RequestMapping("/class")
-    public ModelAndView viewClass () {
-        ModelAndView mav = new ModelAndView("view/class_view");
-        mav.addObject("classList", classService.getAllClasses());
-        return mav;
-    }
+//    @RequestMapping("/student")
+//    public ModelAndView viewStudent () {
+//        ModelAndView mav = new ModelAndView("view/student_view");
+//        mav.addObject("studentList", studentService.getAllStudents());
+//        return mav;
+//    }
+//    @RequestMapping("/professor")
+//    public ModelAndView viewProfessor () {
+//        ModelAndView mav = new ModelAndView("view/professor_view");
+//        mav.addObject("professorList", professorService.getAllProfessors());
+//        return mav;
+//    }
+//    @RequestMapping("/course")
+//    public ModelAndView viewCourse () {
+//        ModelAndView mav = new ModelAndView("view/course_view");
+//        mav.addObject("courseList", courseService.getAllCourses());
+//        return mav;
+//    }
+//    @RequestMapping("/class")
+//    public ModelAndView viewClass () {
+//        ModelAndView mav = new ModelAndView("view/class_view");
+//        mav.addObject("classList", classService.getAllClasses());
+//        return mav;
+//    }
 
     @PostConstruct
     public void callMethodsToTestServices() {
@@ -345,7 +345,7 @@ public class MainController {
             classEntity.setProfessor(professor);
             classEntity.setStudent(student);
             classEntity.setDate(sdf.parse("2022-04-23"));
-            classEntity.setDuration(BigDecimal.valueOf(60));
+            classEntity.setDuration(60);
             classEntity.setValue(BigDecimal.valueOf(60));
             classEntity.setAverage(BigDecimal.valueOf(6));
             classEntity.setResult("Approved");
