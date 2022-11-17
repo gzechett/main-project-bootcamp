@@ -8,7 +8,7 @@
 <div>
     <h1> Edit Student</h1>
     <br/>
-    <form action="#" th:action="@{/save/student}" th:object="${student}" method="post">
+    <form action="#" th:action="@{/student/save}" th:object="${student}" method="post">
         <table border="0" cellpadding="10">
             <tr>
                 <td>Student Id</td>
@@ -26,19 +26,19 @@
             <tr>
                 <td>Student Age</td>
                 <td>
-                    <input type="text" th:field="*{age}"/>
+                    <input type="text" th:field="*{age}" maxlength="2" pattern="[0-9]{2}"/>
                 </td>
             </tr>
             <tr>
                 <td>Registration Number</td>
                 <td>
-                    <input type="text" th:field="*{registrationNumber}"/>
+                    <input type="text" th:field="*{registrationNumber}" maxlength="8" pattern="[0-9]{8}"/>
                 </td>
             </tr>
             <tr>
                 <td>CC</td>
                 <td>
-                    <input type="text" th:field="*{cc}"/>
+                    <input type="text" th:field="*{cc}" maxlength="9" pattern="[0-9]{9}"/>
                 </td>
             </tr>
             <tr>

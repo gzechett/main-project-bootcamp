@@ -6,125 +6,132 @@
     <title>School</title>
 </head>
 <body>
-<div align="right">
-    <a href="/connect">Add a Student</a>
-</div>
+<h1>School</h1>
 <div>
-    <h1>Students List</h1>
-    <a href="/new/student">Add a Student</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Registration Number</th>
-            <th>CC</th>
-            <th>Gender</th>
-            <th>School Year</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${studentList}">
-            <td th:text="${student.name}">Student Name</td>
-            <td th:text="${student.age}">Student Age</td>
-            <td th:text="${student.registrationNumber}">Registration Number</td>
-            <td th:text="${student.cc}">Student CC</td>
-            <td th:text="${student.gender}">Student Gender</td>
-            <td th:text="${student.schoolYear}">School Year</td>
-            <td>
-                <a th:href="@{'/edit/student/' + ${student.id}}">Edit Student</a>
-                <a th:href="@{'/delete/student/' + ${student.id}}">Delete Student</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <h2>Choose a list to show</h2>
+    <a href="/student">Students</a>
+    <a href="/professor">Professor</a>
+    <a href="/course">Course</a>
+    <a href="/class">Class</a>
+<!--    <h1>Students List</h1>-->
+<!--    <a href="/new/student">Add a Student</a>-->
+<!--    <br/><br/>-->
+<!--    <table border="1" cellpadding="15">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Age</th>-->
+<!--            <th>Registration Number</th>-->
+<!--            <th>CC</th>-->
+<!--            <th>Gender</th>-->
+<!--            <th>School Year</th>-->
+<!--            <th>Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="student : ${studentList}">-->
+<!--            <td th:text="${student.name}">Student Name</td>-->
+<!--            <td th:text="${student.age}">Student Age</td>-->
+<!--            <td th:text="${student.registrationNumber}">Registration Number</td>-->
+<!--            <td th:text="${student.cc}">Student CC</td>-->
+<!--            <td th:text="${student.gender}">Student Gender</td>-->
+<!--            <td th:text="${student.schoolYear}">School Year</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/edit/student/' + ${student.id}}">Edit</a>-->
+<!--                <a th:href="@{'/delete/student/' + ${student.id}}">Delete</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
-    <h1>Professors List</h1>
-    <a href="/new/professor">Add a Professor</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>CC</th>
-            <th>Teaching Time (Years)</th>
-            <th>Salary</th>
-            <th>Course</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="professor : ${professorList}">
-            <td th:text="${professor.name}">Professor Name</td>
-            <td th:text="${professor.age}">Professor Age</td>
-            <td th:text="${professor.gender}">Professor Gender</td>
-            <td th:text="${professor.cc}">Professor CC</td>
-            <td th:text="${professor.teachingTime}">Teaching Time</td>
-            <td th:text="${professor.salary}">Salary</td>
-            <td th:text="${professor.course.name}">Course</td>
-            <td>
-                <a th:href="@{'/edit/professor/' + ${professor.id}}">Edit Professor</a>
-                <a th:href="@{'/delete/professor/' + ${professor.id}}">Delete Professor</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<!--    <h1>Professors List</h1>-->
+<!--    <a href="/new/professor">Add a Professor</a>-->
+<!--    <br/><br/>-->
+<!--    <table border="1" cellpadding="10">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Age</th>-->
+<!--            <th>Gender</th>-->
+<!--            <th>CC</th>-->
+<!--            <th>Teaching Time (Years)</th>-->
+<!--            <th>Salary</th>-->
+<!--            <th>Course</th>-->
+<!--            <th>Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="professor : ${professorList}">-->
+<!--            <td th:text="${professor.name}">Professor Name</td>-->
+<!--            <td th:text="${professor.age}">Professor Age</td>-->
+<!--            <td th:text="${professor.gender}">Professor Gender</td>-->
+<!--            <td th:text="${professor.cc}">Professor CC</td>-->
+<!--            <td th:text="${professor.teachingTime}">Teaching Time</td>-->
+<!--            <td th:text="${professor.salary}">Salary</td>-->
+<!--            <td th:text="${professor.course.name}">Course</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/edit/professor/' + ${professor.id}}">Edit</a>-->
+<!--                <a th:href="@{'/delete/professor/' + ${professor.id}}">Delete</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
-    <h1>Courses List</h1>
-    <a href="/new/course">Add a Course</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Area</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="course : ${courseList}">
-            <td th:text="${course.name}">Course Name</td>
-            <td th:text="${course.area}">Course Area</td>
-            <td>
-                <a th:href="@{'/edit/course/' + ${course.id}}">Edit Course</a>
-                <a th:href="@{'/delete/course/' + ${course.id}}">Delete Course</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<!--    <h1>Courses List</h1>-->
+<!--    <a href="/new/course">Add a Course</a>-->
+<!--    <br/><br/>-->
+<!--    <table border="1" cellpadding="10">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Area</th>-->
+<!--            <th>Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="course : ${courseList}">-->
+<!--            <td th:text="${course.name}">Course Name</td>-->
+<!--            <td th:text="${course.area}">Course Area</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/edit/course/' + ${course.id}}">Edit</a>-->
+<!--                <a th:href="@{'/delete/course/' + ${course.id}}">Delete</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
-    <h1>Class List</h1>
-    <a href="/new/class">Add a Class</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Student</th>
-            <th>Professor</th>
-            <th>Date</th>
-            <th>Duration (Min)</th>
-            <th>Value</th>
-            <th>Average</th>
-            <th>Result</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="classEntity : ${classList}">
-            <td th:text="${classEntity.student.name}">Student Name</td>
-            <td th:text="${classEntity.professor.name}">Professor Name</td>
-            <td th:text="${#dates.format(classEntity.Date, 'yyyy-MM-dd')}">Class Date</td>
-            <td th:text="${classEntity.Duration}">Class Duration</td>
-            <td th:text="${classEntity.Value}">Student Value</td>
-            <td th:text="${classEntity.Average}">Student Average</td>
-            <td th:text="${classEntity.Result}">Class Result</td>
-            <td>
-                <a th:href="@{'/edit/class/' + ${classEntity.id}}">Edit Class</a>
-                <a th:href="@{'/delete/class/' + ${classEntity.id}}">Delete Class</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<!--    <h1>Class List</h1>-->
+<!--    <a href="/new/class">Add a Class</a>-->
+<!--    <br/><br/>-->
+<!--    <table border="1" cellpadding="10">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Student</th>-->
+<!--            <th>Professor</th>-->
+<!--            <th>Date</th>-->
+<!--            <th>Duration (Min)</th>-->
+<!--            <th>Value</th>-->
+<!--            <th>Average</th>-->
+<!--            <th>Result</th>-->
+<!--            <th>Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="classEntity : ${classList}">-->
+<!--            <td th:text="${classEntity.student.name}">Student Name</td>-->
+<!--            <td th:text="${classEntity.professor.name}">Professor Name</td>-->
+<!--            <td th:text="${#dates.format(classEntity.Date, 'yyyy-MM-dd')}">Class Date</td>-->
+<!--            <td th:text="${classEntity.Duration}">Class Duration</td>-->
+<!--            <td th:text="${classEntity.Value}">Student Value</td>-->
+<!--            <td th:text="${classEntity.Average}">Student Average</td>-->
+<!--            <td th:text="${classEntity.Result}">Class Result</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/edit/class/' + ${classEntity.id}}">Edit</a>-->
+<!--                <a th:href="@{'/delete/class/' + ${classEntity.id}}">Delete</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 </div>
 </body>
 </html>

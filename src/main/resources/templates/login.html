@@ -8,7 +8,7 @@
 <div align="center">
   <h1> Login </h1>
   </b1>
-  <form action="#" th:action="@{/verify/user}" th:object="${user}" method="get">
+  <form action="#" th:action="@{/user/verify}" th:object="${user}" method="get">
     <table>
       <tr>
         <td>Username</td>
@@ -17,7 +17,7 @@
         </td>
         <td>Password</td>
         <td>
-          <input type="text" th:field="*{password}"/>
+          <input type="password" th:field="*{password}"/>
         </td>
       </tr>
       <tr>

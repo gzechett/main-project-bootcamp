@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<h1> Student </h1>
+<div class="container">
+  <h2>Students List</h2>
+  <a href="/student/new">Add a Student</a>
+  <br/><br/>
+  <table class="table is-striped is-hoverable is-fullwidth" border="1" cellpadding="15">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Registration Number</th>
+      <th>CC</th>
+      <th>Gender</th>
+      <th>School Year</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${studentList}">
+      <td th:text="${student.name}">Student Name</td>
+      <td th:text="${student.age}">Student Age</td>
+      <td th:text="${student.registrationNumber}">Registration Number</td>
+      <td th:text="${student.cc}">Student CC</td>
+      <td th:text="${student.gender}">Student Gender</td>
+      <td th:text="${student.schoolYear}">School Year</td>
+      <td>
+        <a th:href="@{'/student/edit/' + ${student.id}}">Edit</a>
+        <a th:href="@{'/student/delete/' + ${student.id}}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

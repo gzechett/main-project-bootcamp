@@ -8,18 +8,32 @@
 <div>
   <h1> New Class</h1>
   <br/>
-  <form action="#" th:action="@{/save/class}" th:object="${class}" method="post">
+  <form action="#" th:action="@{/class/save}" th:object="${class}" method="post">
     <table border="0" cellpadding="10">
       <tr>
         <td>Student Id</td>
         <td>
-          <input type="text" th:field="*{student.id}"/>
+          <!--          <input type="text" th:field="*{student.id}"/>-->
+          <select th:field="*{student.id}">
+            <option
+                    th:each = "student : ${studentList}"
+                    th:value = "${student.id}"
+                    th:text = "${student.name}">
+            </option>
+          </select>
         </td>
       </tr>
       <tr>
         <td>Professor Id</td>
         <td>
-          <input type="text" th:field="*{professor.id}"/>
+          <!--          <input type="text" th:field="*{professor.id}"/>-->
+          <select th:field="*{professor.id}">
+            <option
+                    th:each = "professor : ${professorList}"
+                    th:value = "${professor.id}"
+                    th:text = "${professor.name}">
+            </option>
+          </select>
         </td>
       </tr>
       <tr>
@@ -31,13 +45,13 @@
       <tr>
         <td>Duration (Min)</td>
         <td>
-          <input type="text" th:field="*{duration}"/>
+          <input type="text" th:field="*{duration}" maxlength="2" pattern="[0-6]"/>
         </td>
       </tr>
       <tr>
         <td>Value</td>
         <td>
-          <input type="text" th:field="*{value}"/>
+          <input type="text" th:field="*{value}" maxlength="3" pattern="[0-9]"/>
         </td>
       </tr>
       <tr>
@@ -48,17 +62,20 @@
       </tr>
       <tr>
         <td>Result</td>
-        <td>
-          <select th:field="*{result}">
-            <option
-                    th:value="Approved"
-                    th:text="Approved">
-            </option>
-            <option
-                    th:value="Refused"
-                    th:text="Refused">
-            </option>
-          </select>
+        <td th:each="result : ${resultOptions}">
+            <input type="radio" th:field="*{result}" th:value="${result}" />
+            <label th:for="${#ids.prev('result')}" th:text="${result}"></label>
+
+<!--          <select th:field="*{result}">-->
+<!--            <option-->
+<!--                    th:value="Approved"-->
+<!--                    th:text="Approved">-->
+<!--            </option>-->
+<!--            <option-->
+<!--                    th:value="Refused"-->
+<!--                    th:text="Refused">-->
+<!--            </option>-->
+<!--          </select>-->
         </td>
       </tr>
       <tr>

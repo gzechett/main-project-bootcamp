@@ -17,6 +17,8 @@ public class StudentValidator {
 
         WebClient webClient = WebClient.create("http://localhost:8082");
         List<StudentEntity> studentList = webClient.get().uri("/validate/educational-year/" + student.getAge()).retrieve().bodyToFlux(StudentEntity.class).collectList().block();
+
+
         if(studentList.stream().anyMatch(student1 -> student1.getSchoolYear().equalsIgnoreCase(student.getSchoolYear()))) {
             System.out.println("Aprovado o ano");
         } else {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Class</title>
+</head>
+<body>
+<h1>Class</h1>
+<div>
+    <h2>Class List</h2>
+    <a href="/class/new">Add a Class</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Student</th>
+            <th>Professor</th>
+            <th>Date</th>
+            <th>Duration (Min)</th>
+            <th>Value</th>
+            <th>Average</th>
+            <th>Result</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="classEntity : ${classList}">
+            <td th:text="${classEntity.student.name}">Student Name</td>
+            <td th:text="${classEntity.professor.name}">Professor Name</td>
+            <td th:text="${#dates.format(classEntity.Date, 'yyyy-MM-dd')}">Class Date</td>
+            <td th:text="${classEntity.Duration}">Class Duration</td>
+            <td th:text="${classEntity.Value}">Student Value</td>
+            <td th:text="${classEntity.Average}">Student Average</td>
+            <td th:text="${classEntity.Result}">Class Result</td>
+            <td>
+                <a th:href="@{'/class/edit/' + ${classEntity.id}}">Edit</a>
+                <a th:href="@{'/class/delete/' + ${classEntity.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

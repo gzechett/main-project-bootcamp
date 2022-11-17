@@ -72,14 +72,14 @@ public class MainController {
     }
 
     //-------------Student-----------------------------------------------
-    @RequestMapping("/save/student")
+    @RequestMapping("/student/save")
     public String saveStudent(@ModelAttribute("student") StudentEntity student) {
         studentValidator.validateSchoolYear(student);
         studentService.addStudent(student);
         return "redirect:/index";
     }
 
-    @RequestMapping("/new/student")
+    @RequestMapping("/student/new")
     public String addStudent(Model model) {
         StudentEntity student = new StudentEntity();
         model.addAttribute("student", student);
@@ -89,7 +89,7 @@ public class MainController {
         return "/new/new_student";
     }
 
-    @RequestMapping("/edit/student/{id}")
+    @RequestMapping("/student/edit/{id}")
     public ModelAndView updateStudent(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit/edit_student");
         StudentEntity student = studentService.getStudent(id);
@@ -100,7 +100,7 @@ public class MainController {
         return mav;
     }
 
-    @RequestMapping("/delete/student/{id}")
+    @RequestMapping("/student/delete/{id}")
     public String deleteStudent(@PathVariable(name = "id") int id) {
         StudentEntity student = studentService.getStudent(id);
 //        for(ClassEntity classEntity : student.getClassList()) {
@@ -113,27 +113,27 @@ public class MainController {
 
     //--------------------Course-----------------------------
 
-    @RequestMapping("/save/course")
+    @RequestMapping("/course/save")
     public String saveCourse(@ModelAttribute("course") CourseEntity course) {
         courseValidator.validateCourse(course);
         courseService.addCourse(course);
         return "redirect:/index";
     }
 
-    @RequestMapping("/new/course")
+    @RequestMapping("/course/new")
     public String addCourse(Model model) {
         CourseEntity course = new CourseEntity();
         model.addAttribute("course", course);
         return "new/new_course";
     }
 
-    @RequestMapping("/delete/course/{id}")
+    @RequestMapping("/course/delete/{id}")
     public String deleteCourse(@PathVariable(name = "id") int id) {
         courseService.delete(courseService.getCourse(id));
         return "redirect:/index";
     }
 
-    @RequestMapping("/edit/course/{id}")
+    @RequestMapping("/course/edit/{id}")
     public ModelAndView updateCourse(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit/edit_course");
         CourseEntity course = courseService.getCourse(id);
@@ -143,13 +143,13 @@ public class MainController {
 
     //--------------------Professor-----------------------------
 
-    @RequestMapping("/save/professor")
+    @RequestMapping("/professor/save")
     public String saveProfessor(@ModelAttribute("professor") ProfessorEntity professor) {
         professorService.addProfessor(professor);
         return "redirect:/index";
     }
 
-    @RequestMapping("/new/professor")
+    @RequestMapping("/professor/new")
     public String addProfessor(Model model) {
         ProfessorEntity professor = new ProfessorEntity();
         model.addAttribute("professor", professor);
@@ -157,13 +157,13 @@ public class MainController {
         return "/new/new_professor";
     }
 
-    @RequestMapping("/delete/professor/{id}")
+    @RequestMapping("/professor/delete/{id}")
     public String deleteProfessor(@PathVariable(name = "id") int id) {
         professorService.delete(professorService.getProfessor(id));
         return "redirect:/index";
     }
 
-    @RequestMapping("/edit/professor/{id}")
+    @RequestMapping("/professor/edit/{id}")
     public ModelAndView updateProfessor(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit/edit_professor");
         ProfessorEntity professor = professorService.getProfessor(id);
@@ -173,16 +173,19 @@ public class MainController {
     }
 
     //--------------------Class-----------------------------
-    @RequestMapping("/save/class")
+    @RequestMapping("/class/save")
     public String saveClass(@ModelAttribute("class") ClassEntity classEntity) {
         classService.addClass(classEntity);
         return "redirect:/index";
     }
 
-    @RequestMapping("/new/class")
+    @RequestMapping("/class/new")
     public String addClass(Model model) {
         ClassEntity classEntity = new ClassEntity();
         model.addAttribute("class", classEntity);
+        model.addAttribute("studentList",studentService.getAllStudents());
+        model.addAttribute("professorList",professorService.getAllProfessors());
+        model.addAttribute("resultOptions",new ArrayList<String>(Arrays.asList("Approved","Refused")));
         return "new/new_class";
     }
 
@@ -192,27 +195,17 @@ public class MainController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/edit/class/{id}")
+    @RequestMapping("/class/edit/{id}")
     public ModelAndView updateClass(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit/edit_class");
         ClassEntity classEntity = classService.getClass(id);
         mav.addObject("class", classEntity);
+        mav.addObject("studentList",studentService.getAllStudents());
+        mav.addObject("professorList",professorService.getAllProfessors());
         return mav;
     }
 
-    @RequestMapping("/connect")
-    public String connectApi() {
-        WebClient webClient = WebClient.create("http://localhost:8082");
-        List<CourseEntity> courses = webClient.get().uri("/courses").retrieve().bodyToFlux(CourseEntity.class).collectList().block();
-
-        WebClient webClient2 = WebClient.create("http://localhost:8082");
-        List<StudentEntity> studentList = webClient.get().uri("/validate/educational-year/" + 6).retrieve().bodyToFlux(StudentEntity.class).collectList().block();
-        System.out.println("aaaa");
-
-        return null;
-    }
-
-    @RequestMapping("/save/login")
+    @RequestMapping("/login/save")
     public String saveUser(@ModelAttribute(name = "user") UserEntity user) {
         return null;
     }
@@ -224,12 +217,37 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/verify/user")
+    @RequestMapping("/user/verify")
     public String verifyUser(@ModelAttribute(name = "user") UserEntity user){
         if(!userService.existUser(user)){
             return "redirect:/";
         }
         return "redirect:/index";
+    }
+
+    @RequestMapping("/student")
+    public ModelAndView viewStudent () {
+        ModelAndView mav = new ModelAndView("view/student_view");
+        mav.addObject("studentList", studentService.getAllStudents());
+        return mav;
+    }
+    @RequestMapping("/professor")
+    public ModelAndView viewProfessor () {
+        ModelAndView mav = new ModelAndView("view/professor_view");
+        mav.addObject("professorList", professorService.getAllProfessors());
+        return mav;
+    }
+    @RequestMapping("/course")
+    public ModelAndView viewCourse () {
+        ModelAndView mav = new ModelAndView("view/course_view");
+        mav.addObject("courseList", courseService.getAllCourses());
+        return mav;
+    }
+    @RequestMapping("/class")
+    public ModelAndView viewClass () {
+        ModelAndView mav = new ModelAndView("view/class_view");
+        mav.addObject("classList", classService.getAllClasses());
+        return mav;
     }
 
     @PostConstruct
@@ -239,6 +257,11 @@ public class MainController {
         this.courseServiceTest();
         this.professorServiceTest();
         this.classServiceTest();
+
+        UserEntity user = new UserEntity();
+        user.setUsername("user");
+        user.setPassword("pass");
+        userService.saveUser(user);
     }
 
     public void studentServiceTest() {
