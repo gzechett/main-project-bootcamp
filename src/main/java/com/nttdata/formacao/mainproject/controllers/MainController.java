@@ -54,6 +54,13 @@ public class MainController {
     @Autowired
     private IUserService userService;
 
+    @RequestMapping("/")
+    public String login(Model model) {
+        UserEntity user = new UserEntity();
+        model.addAttribute("user", user);
+        return "login";
+    }
+
     @RequestMapping("/index")
     public String viewHomePage(Model model) {
         List<StudentEntity> studentList = studentService.getAllStudents();
@@ -210,12 +217,7 @@ public class MainController {
 //        return null;
 //    }
 //
-    @RequestMapping("/")
-    public String login(Model model) {
-        UserEntity user = new UserEntity();
-        model.addAttribute("user", user);
-        return "login";
-    }
+
 
 //    @RequestMapping("/user/verify")
 //    public String verifyUser(@ModelAttribute(name = "user") UserEntity user){

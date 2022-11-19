@@ -34,7 +34,7 @@ public class StudentController {
     public String saveStudent(@ModelAttribute("student") StudentEntity student) {
         studentValidator.validateSchoolYear(student);
         studentService.addStudent(student);
-        return "redirect:/index";
+        return "redirect:/student";
     }
 
     @RequestMapping("/student/new")
@@ -65,6 +65,6 @@ public class StudentController {
 //            classService.delete(classEntity);
 //        }
         studentService.delete(student);
-        return "redirect:/index";
+        return "redirect:/student";
     }
 }

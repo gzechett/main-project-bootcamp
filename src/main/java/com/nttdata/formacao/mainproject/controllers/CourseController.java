@@ -31,7 +31,7 @@ public class CourseController {
     public String saveCourse(@ModelAttribute("course") CourseEntity course) {
         courseValidator.validateCourse(course);
         courseService.addCourse(course);
-        return "redirect:/index";
+        return "redirect:/course";
     }
 
     @RequestMapping("/course/new")
@@ -44,7 +44,7 @@ public class CourseController {
     @RequestMapping("/course/delete/{id}")
     public String deleteCourse(@PathVariable(name = "id") int id) {
         courseService.delete(courseService.getCourse(id));
-        return "redirect:/index";
+        return "redirect:/course";
     }
 
     @RequestMapping("/course/edit/{id}")

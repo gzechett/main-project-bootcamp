@@ -30,7 +30,7 @@ public class ProfessorController {
     @RequestMapping("/professor/save")
     public String saveProfessor(@ModelAttribute("professor") ProfessorEntity professor) {
         professorService.addProfessor(professor);
-        return "redirect:/index";
+        return "redirect:/professor";
     }
 
     @RequestMapping("/professor/new")
@@ -44,7 +44,7 @@ public class ProfessorController {
     @RequestMapping("/professor/delete/{id}")
     public String deleteProfessor(@PathVariable(name = "id") int id) {
         professorService.delete(professorService.getProfessor(id));
-        return "redirect:/index";
+        return "redirect:/professor";
     }
 
     @RequestMapping("/professor/edit/{id}")

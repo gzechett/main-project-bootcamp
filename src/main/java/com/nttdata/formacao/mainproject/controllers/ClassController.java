@@ -37,7 +37,7 @@ public class ClassController {
     @RequestMapping("/class/save")
     public String saveClass(@ModelAttribute("class") ClassEntity classEntity) {
         classService.addClass(classEntity);
-        return "redirect:/index";
+        return "redirect:/class";
     }
 
     @RequestMapping("/class/new")
@@ -50,10 +50,10 @@ public class ClassController {
         return "new/new_class";
     }
 
-    @RequestMapping("/delete/class/{id}")
+    @RequestMapping("/class/delete/{id}")
     public String deleteClass(@PathVariable(name = "id") int id) {
         classService.delete(classService.getClass(id));
-        return "redirect:/index";
+        return "redirect:/class";
     }
 
     @RequestMapping("/class/edit/{id}")
