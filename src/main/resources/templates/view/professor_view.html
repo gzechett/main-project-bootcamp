@@ -1,44 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Professor</title>
+<head th:replace="~{fragment :: head('Professor')}">
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"-->
+<!--          rel="stylesheet"-->
+<!--          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
+<!--          crossorigin="anonymous">-->
+<!--    <title>Professor</title>-->
 </head>
 <body>
-<h1> Professor</h1>
-<div>
-    <h2>Professors List</h2>
-    <a href="/professor/new">Add a Professor</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>CC</th>
-            <th>Teaching Time (Years)</th>
-            <th>Salary</th>
-            <th>Course</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="professor : ${professorList}">
-            <td th:text="${professor.name}">Professor Name</td>
-            <td th:text="${professor.age}">Professor Age</td>
-            <td th:text="${professor.gender}">Professor Gender</td>
-            <td th:text="${professor.cc}">Professor CC</td>
-            <td th:text="${professor.teachingTime}">Teaching Time</td>
-            <td th:text="${professor.salary}">Salary</td>
-            <td th:text="${professor.course.name}">Course</td>
-            <td>
-                <a th:href="@{'/professor/edit/' + ${professor.id}}">Edit</a>
-                <a th:href="@{'/professor/delete/' + ${professor.id}}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+<nav th:replace="~{fragment :: navBar}">
+<!--        class="navbar navbar-expand-lg bg-light">-->
+<!--    &lt;!&ndash; Main &ndash;&gt;-->
+<!--    <div class="container-fluid">-->
+<!--        <a class="navbar-brand" href="#">School App</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        &lt;!&ndash; List nav &ndash;&gt;-->
+<!--        <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
+<!--            <ul class="navbar-nav">-->
+<!--                &lt;!&ndash; Home &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" aria-current="page" href="/index">Home</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Student &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/student">Student</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Professors &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/professor">Professor</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Course &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/course">Course</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Class &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/class">Class</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+</nav>
+
+<!--Main code-->
+<div class="container-fluid" align="center">
+
+    <!--    <h2>Professors List</h2>-->
+    <!--    <a href="/professor/new">Add a Professor</a>-->
+    <div class="col-5">
+
+        <div align="center">
+            <h2>Professors</h2>
+        </div>
+        <br/>
+        <div class="container text-center">
+            <table class="table is-striped is-hoverable" border="4" cellpadding="20">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>CC</th>
+                    <th>Teaching Time (Years)</th>
+                    <th>Salary</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="professor : ${professorList}">
+                    <td th:text="${professor.name}">Professor Name</td>
+                    <td th:text="${professor.age}">Professor Age</td>
+                    <td th:text="${professor.gender}">Professor Gender</td>
+                    <td th:text="${professor.cc}">Professor CC</td>
+                    <td th:text="${professor.teachingTime}">Teaching Time</td>
+                    <td th:text="${professor.salary}">Salary</td>
+                    <td th:text="${professor.course.name}">Course</td>
+                    <td>
+                        <a th:href="@{'/professor/edit/' + ${professor.id}}">Edit</a>
+                        <a th:href="@{'/professor/delete/' + ${professor.id}}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:replace="~{fragment :: viewActionButtons('professor')}">
+<!--                    align="left">-->
+<!--                <a class="btn btn-primary" href="/professor/new" role="button">Add Professor</a>-->
+<!--                <a class="btn btn-secondary" href="/index" role="button">Back</a>-->
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
