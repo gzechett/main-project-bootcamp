@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New Course</title>
+<head th:replace="~{fragment :: head('New Course')}">
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"-->
+<!--          rel="stylesheet"-->
+<!--          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
+<!--          crossorigin="anonymous">-->
+<!--    <title>New Course</title>-->
 </head>
 <body>
-<div>
-  <h1> New Course</h1>
-  <br/>
-  <form action="#" th:action="@{/course/save}" th:object="${course}" method="post">
-    <table border="0" cellpadding="10">
-      <tr>
-        <td>Course Title</td>
-        <td>
-          <input type="text" th:field="*{name}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Course Area</td>
-        <td>
-          <input type="text" th:field="*{area}"/>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <button type="submit">Save</button>
-        </td>
-      </tr>
-    </table>
-  </form>
+
+<nav th:replace="~{fragment :: navBar}"> </nav>
+
+<div align="center">
+    <h1> New Course</h1>
+    <br/><br/>
+    <form action="#" th:action="@{/course/save}" th:object="${course}" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Course Title</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Course Area</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{area}"/>
+                </td>
+            </tr>
+            <tr>
+                <br/>
+                <td colspan="2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-secondary" href="/course" role="button">Back</a>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>
