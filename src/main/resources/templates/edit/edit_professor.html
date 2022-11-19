@@ -1,87 +1,130 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Professor</title>
+<head th:replace="~{fragment :: head('Edit Professor')}">
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"-->
+<!--          rel="stylesheet"-->
+<!--          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
+<!--          crossorigin="anonymous">-->
+<!--    <title>Edit Professor</title>-->
 </head>
 <body>
-<div>
-  <h1> Edit Professor</h1>
-  <br/>
-  <form action="#" th:action="@{/professor/save}" th:object="${professor}" method="post">
-    <table border="0" cellpadding="10">
-      <tr>
-        <td>Professor Id</td>
-        <td>
-          <input type="text" th:field="*{id}" readonly="readonly"/>
-        </td>
-      </tr>
-      <tr>
-      <tr>
-        <td>Professor Name</td>
-        <td>
-          <input type="text" th:field="*{name}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Professor Age</td>
-        <td>
-          <input type="text" th:field="*{age}" maxlength="2" pattern="[0-9]{2}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>CC</td>
-        <td>
-          <input type="text" th:field="*{cc}" maxlength="9" pattern="[0-9]{9}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Professor Gender</td>
-        <td>
-          <select th:field="*{gender}">
-            <option
-                    th:value="M"
-                    th:text="Male">
-            </option>
-            <option
-                    th:value="F"
-                    th:text="Female">
-            </option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Teaching Time (Years)</td>
-        <td>
-          <input type="text" th:field="*{teachingTime}" maxlength="2" pattern="[0-9]"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Salary</td>
-        <td>
-          <input type="text" th:field="*{salary}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>Course</td>
-        <td>
-          <!--          <input type="text" th:field="*{course.id}"/>-->
-          <select th:field="*{course.id}">
-            <option
-                    th:each="course : ${courseList}"
-                    th:value="${course.id}"
-                    th:text="${course.name}">
-            </option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <button type="submit">Save</button>
-        </td>
-      </tr>
-    </table>
-  </form>
+
+<nav th:replace="~{fragment :: navBar}">
+<!--        class="navbar navbar-expand-lg bg-light">-->
+<!--    &lt;!&ndash; Main &ndash;&gt;-->
+<!--    <div class="container-fluid">-->
+<!--        <a class="navbar-brand" href="#">School App</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        &lt;!&ndash; List nav &ndash;&gt;-->
+<!--        <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
+<!--            <ul class="navbar-nav">-->
+<!--                &lt;!&ndash; Home &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" aria-current="page" href="/index">Home</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Student &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/student">Student</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Professors &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/professor">Professor</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Course &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/course">Course</a>-->
+<!--                </li>-->
+<!--                &lt;!&ndash; Class &ndash;&gt;-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/class">Class</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+</nav>
+
+<div align="center">
+    <h1> Edit Professor</h1>
+    <br/><br/>
+    <form action="#" th:action="@{/professor/save}" th:object="${professor}" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Professor Id</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{id}" readonly="readonly"/>
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td>Professor Name</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Professor Age</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{age}" maxlength="2" pattern="[0-9]{2}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>CC</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{cc}" maxlength="9" pattern="[0-9]{9}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Professor Gender</td>
+                <td>
+                    <select th:field="*{gender}">
+                        <option
+                                th:value="M"
+                                th:text="Male">
+                        </option>
+                        <option
+                                th:value="F"
+                                th:text="Female">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Teaching Time (Years)</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{teachingTime}" maxlength="2" pattern="[0-9]"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Salary</td>
+                <td>
+                    <input class="form-control" type="text" th:field="*{salary}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Course</td>
+                <td>
+                    <!--          <input type="text" th:field="*{course.id}"/>-->
+                    <select th:field="*{course.id}">
+                        <option
+                                th:each="course : ${courseList}"
+                                th:value="${course.id}"
+                                th:text="${course.name}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-secondary" href="/professor" role="button">Back</a>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>
