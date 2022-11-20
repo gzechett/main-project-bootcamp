@@ -1,6 +1,8 @@
 package com.nttdata.formacao.mainproject.controllers;
 
 import com.nttdata.formacao.mainproject.entities.StudentEntity;
+import com.nttdata.formacao.mainproject.enums.Gender;
+import com.nttdata.formacao.mainproject.enums.SchoolYears;
 import com.nttdata.formacao.mainproject.services.interfaces.IStudentService;
 import com.nttdata.formacao.mainproject.validators.StudentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class StudentController {
@@ -41,9 +40,8 @@ public class StudentController {
     public String addStudent(Model model) {
         StudentEntity student = new StudentEntity();
         model.addAttribute("student", student);
-        model.addAttribute("schoolYearList", new ArrayList<String>(Arrays.asList(
-                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
-        )));
+        model.addAttribute("schoolYearList", SchoolYears.values());
+        model.addAttribute("genderList", Gender.values());
         return "/new/new_student";
     }
 
@@ -52,9 +50,11 @@ public class StudentController {
         ModelAndView mav = new ModelAndView("edit/edit_student");
         StudentEntity student = studentService.getStudent(id);
         mav.addObject("student",student);
-        mav.addObject("schoolYearList", new ArrayList<String>(Arrays.asList(
-                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
-        )));
+//        mav.addObject("schoolYearList", new ArrayList<String>(Arrays.asList(
+//                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
+//        )));
+        mav.addObject("schoolYearList", SchoolYears.values());
+        mav.addObject("genderList", Gender.values());
         return mav;
     }
 

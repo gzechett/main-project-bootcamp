@@ -83,12 +83,9 @@
                 <td>
                     <select th:field="*{gender}">
                         <option
-                                th:value="M"
-                                th:text="Male">
-                        </option>
-                        <option
-                                th:value="F"
-                                th:text="Female">
+                                th:each="gender : ${genderList}"
+                                th:value="${gender.shortDescription}"
+                                th:text="${gender.description}">
                         </option>
                     </select>
                 </td>
@@ -99,8 +96,8 @@
                     <select th:field="*{schoolYear}">
                         <option
                                 th:each="years : ${schoolYearList}"
-                                th:value="${years}"
-                                th:text="${years}">
+                                th:value="${years.description}"
+                                th:text="${years.description}">
                         </option>
                     </select>
                 </td>
