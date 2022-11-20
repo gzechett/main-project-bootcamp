@@ -1,6 +1,7 @@
 package com.nttdata.formacao.mainproject.controllers;
 
 import com.nttdata.formacao.mainproject.entities.ClassEntity;
+import com.nttdata.formacao.mainproject.enums.ClassResult;
 import com.nttdata.formacao.mainproject.services.interfaces.IClassService;
 import com.nttdata.formacao.mainproject.services.interfaces.IProfessorService;
 import com.nttdata.formacao.mainproject.services.interfaces.IStudentService;
@@ -46,7 +47,8 @@ public class ClassController {
         model.addAttribute("class", classEntity);
         model.addAttribute("studentList",studentService.getAllStudents());
         model.addAttribute("professorList",professorService.getAllProfessors());
-        model.addAttribute("resultOptions",new ArrayList<String>(Arrays.asList("Approved","Refused")));
+//        model.addAttribute("resultOptions",new ArrayList<String>(Arrays.asList("Approved","Refused")));
+        model.addAttribute("resultOptions", ClassResult.values());
         return "new/new_class";
     }
 
@@ -63,7 +65,7 @@ public class ClassController {
         mav.addObject("class", classEntity);
         mav.addObject("studentList",studentService.getAllStudents());
         mav.addObject("professorList",professorService.getAllProfessors());
-        mav.addObject("resultOptions",new ArrayList<String>(Arrays.asList("Approved","Refused")));
+        mav.addObject("resultOptions", ClassResult.values());
         return mav;
     }
 }

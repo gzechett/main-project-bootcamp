@@ -111,8 +111,8 @@
             <tr>
                 <td>Result</td>
                 <td th:each="result : ${resultOptions}">
-                    <input type="radio" th:field="*{result}" th:value="${result}"/>
-                    <label th:for="${#ids.prev('result')}" th:text="${result}"></label>
+                    <input type="radio" th:field="*{result}" th:value="${result.description}"/>
+                    <label th:for="${#ids.prev('result')}" th:text="${result.description}"></label>
                     <!--          <select th:field="*{result}">-->
                     <!--            <option-->
                     <!--                    th:value="Approved"-->
