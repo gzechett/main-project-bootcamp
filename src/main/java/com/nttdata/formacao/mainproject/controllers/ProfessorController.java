@@ -1,6 +1,7 @@
 package com.nttdata.formacao.mainproject.controllers;
 
 import com.nttdata.formacao.mainproject.entities.ProfessorEntity;
+import com.nttdata.formacao.mainproject.enums.Gender;
 import com.nttdata.formacao.mainproject.services.interfaces.ICourseService;
 import com.nttdata.formacao.mainproject.services.interfaces.IProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class ProfessorController {
         ProfessorEntity professor = new ProfessorEntity();
         model.addAttribute("professor", professor);
         model.addAttribute("courseList", courseService.getAllCourses());
+        model.addAttribute("genderList", Gender.values());
         return "/new/new_professor";
     }
 
@@ -53,6 +55,7 @@ public class ProfessorController {
         ProfessorEntity professor = professorService.getProfessor(id);
         mav.addObject("professor", professor);
         mav.addObject("courseList", courseService.getAllCourses());
+        mav.addObject("genderList", Gender.values());
         return mav;
     }
 }

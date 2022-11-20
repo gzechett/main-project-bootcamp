@@ -76,12 +76,9 @@
                 <td>
                     <select th:field="*{gender}">
                         <option
-                                th:value="M"
-                                th:text="Male">
-                        </option>
-                        <option
-                                th:value="F"
-                                th:text="Female">
+                                th:each="gender : ${genderList}"
+                                th:value="${gender.shortDescription}"
+                                th:text="${gender.description}">
                         </option>
                     </select>
                 </td>
