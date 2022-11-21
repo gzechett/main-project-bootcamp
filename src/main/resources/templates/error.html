@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment :: head('Error')}">
+<body>
+<nav th:replace="~{fragment :: navBar}"></nav>
+<div class="container">
+    <div align="center">
+        <h2>Error</h2>
+    </div>
+    <br/>
+    <div>
+        <h3>Opps... An Internal Error Occured</h3>
+        <div class="alert alert-danger" role="alert">
+            Please contact our support to obtain more information, or try again later.
+            <div th:text="${error}"></div>
+        </div>
+    </div>
+    <a class="btn btn-secondary" href="/index" role="button">Back</a>
+</div>
+</body>
+</html>
