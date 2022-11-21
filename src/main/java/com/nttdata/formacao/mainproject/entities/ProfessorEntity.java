@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,21 +24,29 @@ public class ProfessorEntity {
     private Long id;
 
     @Column(name = "cc", nullable = false, unique = true, length = 9)
+    @NotNull
+    @NotBlank
     private String cc;
 
     @Column(name = "name", nullable = false)
+    @NotNull
+    @NotBlank
     private String name;
 
     @Column(name = "gender", nullable = false, columnDefinition = "CHAR")
     private String gender;
 
     @Column(name = "age", nullable = false)
+    @NotNull
+    @Min(value = 18, message = "The professor must be at least 18 years old ")
     private Integer age;
 
     @Column(name = "teaching_time")
-    private int teachingTime;
+    @NotNull
+    private Integer teachingTime;
 
     @Column(name = "salary", nullable = false)
+    @NotNull
     private BigDecimal salary;
 
     @ManyToOne

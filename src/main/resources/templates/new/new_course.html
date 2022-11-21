@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragment :: head('New Course')}">
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"-->
-<!--          rel="stylesheet"-->
-<!--          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
-<!--          crossorigin="anonymous">-->
-<!--    <title>New Course</title>-->
-</head>
+
+<head th:replace="~{fragment :: head('New Course')}"></head>
+
 <body>
 
-<nav th:replace="~{fragment :: navBar}"> </nav>
+<nav th:replace="~{fragment :: navBar}"></nav>
 
 <div align="center">
     <h1> New Course</h1>
     <br/><br/>
-    <form action="#" th:action="@{/course/save}" th:object="${course}" method="post">
+    <form action="#" th:action="@{/course}" th:object="${course}" method="post">
         <table border="0" cellpadding="10">
             <tr>
                 <td>Course Title</td>
@@ -39,6 +33,8 @@
             </tr>
         </table>
     </form>
-</div>
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('course')}" th:errorclass="error"
+         th:errors="*{course}">
+    </div>
 </body>
 </html>

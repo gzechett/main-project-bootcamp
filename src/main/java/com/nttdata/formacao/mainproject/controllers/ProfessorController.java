@@ -7,12 +7,14 @@ import com.nttdata.formacao.mainproject.services.interfaces.IProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
+@RequestMapping(value = "professor")
 public class ProfessorController {
 
     @Autowired
@@ -21,20 +23,26 @@ public class ProfessorController {
     @Autowired
     private ICourseService courseService;
 
-    @RequestMapping("/professor")
+    @GetMapping("")
     public ModelAndView viewProfessor () {
         ModelAndView mav = new ModelAndView("view/professor_view");
         mav.addObject("professorList", professorService.getAllProfessors());
         return mav;
     }
 
-    @RequestMapping("/professor/save")
-    public String saveProfessor(@ModelAttribute("professor") ProfessorEntity professor) {
+    @PostMapping("")
+    public ModelAndView saveProfessor(@Valid @ModelAttribute("professor") ProfessorEntity professor, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/new/new_professor");
+            mav.addObject("courseList", courseService.getAllCourses());
+            mav.addObject("genderList", Gender.values());
+            return mav;
+        }
         professorService.addProfessor(professor);
-        return "redirect:/professor";
+        return new ModelAndView("redirect:/professor");
     }
 
-    @RequestMapping("/professor/new")
+    @GetMapping("new")
     public String addProfessor(Model model) {
         ProfessorEntity professor = new ProfessorEntity();
         model.addAttribute("professor", professor);
@@ -43,13 +51,13 @@ public class ProfessorController {
         return "/new/new_professor";
     }
 
-    @RequestMapping("/professor/delete/{id}")
+    @RequestMapping("{id}/delete")
     public String deleteProfessor(@PathVariable(name = "id") int id) {
         professorService.delete(professorService.getProfessor(id));
         return "redirect:/professor";
     }
 
-    @RequestMapping("/professor/edit/{id}")
+    @GetMapping("{id}/edit")
     public ModelAndView updateProfessor(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit/edit_professor");
         ProfessorEntity professor = professorService.getProfessor(id);
@@ -57,5 +65,18 @@ public class ProfessorController {
         mav.addObject("courseList", courseService.getAllCourses());
         mav.addObject("genderList", Gender.values());
         return mav;
+    }
+
+    @PostMapping("{id}") //PUTMapping(Mas não funcionou com PUT)
+    public ModelAndView update(@PathVariable long id, @Valid @ModelAttribute("professor") ProfessorEntity professor, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/edit/edit_professor");
+            mav.addObject("courseList", courseService.getAllCourses());
+            mav.addObject("genderList", Gender.values());
+            return mav;
+        }
+        professor.setId(id);
+        professorService.addProfessor(professor);
+        return new ModelAndView("redirect:/professor");
     }
 }

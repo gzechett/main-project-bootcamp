@@ -4,39 +4,43 @@ import com.nttdata.formacao.mainproject.entities.StudentEntity;
 import com.nttdata.formacao.mainproject.enums.Gender;
 import com.nttdata.formacao.mainproject.enums.SchoolYears;
 import com.nttdata.formacao.mainproject.services.interfaces.IStudentService;
-import com.nttdata.formacao.mainproject.validators.StudentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
+@RequestMapping(value = "student")
 public class StudentController {
 
     @Autowired
     private IStudentService studentService;
 
-    @Autowired
-    private StudentValidator studentValidator;
-
-    @RequestMapping("/student")
-    public ModelAndView viewStudent () {
+    @GetMapping("")
+    public ModelAndView viewStudent() {
         ModelAndView mav = new ModelAndView("view/student_view");
         mav.addObject("studentList", studentService.getAllStudents());
         return mav;
     }
 
-    @RequestMapping("/student/save")
-    public String saveStudent(@ModelAttribute("student") StudentEntity student) {
-        studentValidator.validateSchoolYear(student);
+    @PostMapping("")
+    public ModelAndView saveStudent(@Valid @ModelAttribute("student") StudentEntity student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/new/new_student");
+            mav.addObject("schoolYearList", SchoolYears.values());
+            mav.addObject("genderList", Gender.values());
+            return mav;
+        }
+//        studentValidatorOld.validateSchoolYear(student);
         studentService.addStudent(student);
-        return "redirect:/student";
+        return new ModelAndView("redirect:/student");
     }
 
-    @RequestMapping("/student/new")
+    @GetMapping("new")
     public String addStudent(Model model) {
         StudentEntity student = new StudentEntity();
         model.addAttribute("student", student);
@@ -45,26 +49,33 @@ public class StudentController {
         return "/new/new_student";
     }
 
-    @RequestMapping("/student/edit/{id}")
+    @GetMapping("/{id}/edit")
     public ModelAndView updateStudent(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit/edit_student");
         StudentEntity student = studentService.getStudent(id);
-        mav.addObject("student",student);
-//        mav.addObject("schoolYearList", new ArrayList<String>(Arrays.asList(
-//                "1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"
-//        )));
+        mav.addObject("student", student);
         mav.addObject("schoolYearList", SchoolYears.values());
         mav.addObject("genderList", Gender.values());
         return mav;
     }
 
-    @RequestMapping("/student/delete/{id}")
+    @RequestMapping("/{id}/delete") //Delete Mapping(Mas não funcionou com DELETE)
     public String deleteStudent(@PathVariable(name = "id") int id) {
         StudentEntity student = studentService.getStudent(id);
-//        for(ClassEntity classEntity : student.getClassList()) {
-//            classService.delete(classEntity);
-//        }
         studentService.delete(student);
         return "redirect:/student";
+    }
+
+    @PostMapping("/{id}") //PUTMapping(Mas não funcionou com PUT)
+    public ModelAndView update(@PathVariable long id, @Valid @ModelAttribute("student") StudentEntity student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/edit/edit_student");
+            mav.addObject("schoolYearList", SchoolYears.values());
+            mav.addObject("genderList", Gender.values());
+            return mav;
+        }
+        student.setId(id);
+        studentService.addStudent(student);
+        return new ModelAndView("redirect:/student");
     }
 }

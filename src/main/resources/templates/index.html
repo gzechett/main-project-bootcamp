@@ -1,55 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragment :: head('Home')}">
-    <!--    <meta charset="UTF-8">-->
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"-->
-    <!--          rel="stylesheet"-->
-    <!--          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"-->
-    <!--          crossorigin="anonymous">-->
-    <!--    <title>School</title>-->
-</head>
+
+<head th:replace="~{fragment :: head('Home')}"></head>
+
 <body>
 
-<nav th:replace="~{fragment :: navBar}">
-    <!--        class="navbar navbar-expand-lg bg-light">-->
-    <!--    &lt;!&ndash; Main &ndash;&gt;-->
-    <!--    <div class="container-fluid">-->
-    <!--        <a class="navbar-brand" href="#">School App</a>-->
-    <!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
-    <!--            <span class="navbar-toggler-icon"></span>-->
-    <!--        </button>-->
-    <!--        &lt;!&ndash; List nav &ndash;&gt;-->
-    <!--        <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
-    <!--            <ul class="navbar-nav">-->
-    <!--                &lt;!&ndash; Home &ndash;&gt;-->
-    <!--                <li class="nav-item">-->
-    <!--                    <a class="nav-link active" aria-current="page" href="/index">Home</a>-->
-    <!--                </li>-->
-    <!--                &lt;!&ndash; Student &ndash;&gt;-->
-    <!--                <li class="nav-item">-->
-    <!--                    <a class="nav-link" href="/student">Student</a>-->
-    <!--                </li>-->
-    <!--                &lt;!&ndash; Professors &ndash;&gt;-->
-    <!--                <li class="nav-item">-->
-    <!--                    <a class="nav-link" href="/professor">Professor</a>-->
-    <!--                </li>-->
-    <!--                &lt;!&ndash; Course &ndash;&gt;-->
-    <!--                <li class="nav-item">-->
-    <!--                    <a class="nav-link" href="/course">Course</a>-->
-    <!--                </li>-->
-    <!--                &lt;!&ndash; Class &ndash;&gt;-->
-    <!--                <li class="nav-item">-->
-    <!--                    <a class="nav-link" href="/class">Class</a>-->
-    <!--                </li>-->
-    <!--            </ul>-->
-    <!--        </div>-->
-    <!--    </div>-->
-</nav>
+<nav th:replace="~{fragment :: navBar}"></nav>
 
-
-<!--<h1>School</h1>-->
 <!-- Title -->
 <div align="center">
     <h2>School App</h2>
@@ -91,138 +49,7 @@
                 <a href="/class" role="button">Class</a>
             </i>
         </button>
-        <!--        <button class="bi-alarm" type="button">-->
-        <!--                <a href="/class"></a>-->
-        <!--        </button>-->
-
-        <!--        <i class="bi bi-mortarboard-fill"><a href="/student">Students</a></i>-->
-        <!--        <i class="bi bi-person-fill"><a href="/professor">Professor</a></i>-->
-        <!--        <i class="bi bi-sticky"><a href="/course">Course</a></i>-->
-        <!--        <i class="bi bi-person-video"><a href="/class" >Class</a></i>-->
     </div>
-    <!--    <i class="bi bi-mortarboard-fill" ><a href="/student">Students</a></i>-->
-    <!--    <i class="bi bi-person-fill"><a href="/professor">Professor</a></i>-->
-    <!--    <i class="bi bi-sticky"><a href="/course">Course</a></i>-->
-    <!--    <i class="bi bi-person-video"><a href="/class">Class</a></i>-->
-    <!--    <h1>Students List</h1>-->
-    <!--    <a href="/new/student">Add a Student</a>-->
-    <!--    <br/><br/>-->
-    <!--    <table border="1" cellpadding="15">-->
-    <!--        <thead>-->
-    <!--        <tr>-->
-    <!--            <th>Name</th>-->
-    <!--            <th>Age</th>-->
-    <!--            <th>Registration Number</th>-->
-    <!--            <th>CC</th>-->
-    <!--            <th>Gender</th>-->
-    <!--            <th>School Year</th>-->
-    <!--            <th>Actions</th>-->
-    <!--        </tr>-->
-    <!--        </thead>-->
-    <!--        <tbody>-->
-    <!--        <tr th:each="student : ${studentList}">-->
-    <!--            <td th:text="${student.name}">Student Name</td>-->
-    <!--            <td th:text="${student.age}">Student Age</td>-->
-    <!--            <td th:text="${student.registrationNumber}">Registration Number</td>-->
-    <!--            <td th:text="${student.cc}">Student CC</td>-->
-    <!--            <td th:text="${student.gender}">Student Gender</td>-->
-    <!--            <td th:text="${student.schoolYear}">School Year</td>-->
-    <!--            <td>-->
-    <!--                <a th:href="@{'/edit/student/' + ${student.id}}">Edit</a>-->
-    <!--                <a th:href="@{'/delete/student/' + ${student.id}}">Delete</a>-->
-    <!--            </td>-->
-    <!--        </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
-
-    <!--    <h1>Professors List</h1>-->
-    <!--    <a href="/new/professor">Add a Professor</a>-->
-    <!--    <br/><br/>-->
-    <!--    <table border="1" cellpadding="10">-->
-    <!--        <thead>-->
-    <!--        <tr>-->
-    <!--            <th>Name</th>-->
-    <!--            <th>Age</th>-->
-    <!--            <th>Gender</th>-->
-    <!--            <th>CC</th>-->
-    <!--            <th>Teaching Time (Years)</th>-->
-    <!--            <th>Salary</th>-->
-    <!--            <th>Course</th>-->
-    <!--            <th>Actions</th>-->
-    <!--        </tr>-->
-    <!--        </thead>-->
-    <!--        <tbody>-->
-    <!--        <tr th:each="professor : ${professorList}">-->
-    <!--            <td th:text="${professor.name}">Professor Name</td>-->
-    <!--            <td th:text="${professor.age}">Professor Age</td>-->
-    <!--            <td th:text="${professor.gender}">Professor Gender</td>-->
-    <!--            <td th:text="${professor.cc}">Professor CC</td>-->
-    <!--            <td th:text="${professor.teachingTime}">Teaching Time</td>-->
-    <!--            <td th:text="${professor.salary}">Salary</td>-->
-    <!--            <td th:text="${professor.course.name}">Course</td>-->
-    <!--            <td>-->
-    <!--                <a th:href="@{'/edit/professor/' + ${professor.id}}">Edit</a>-->
-    <!--                <a th:href="@{'/delete/professor/' + ${professor.id}}">Delete</a>-->
-    <!--            </td>-->
-    <!--        </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
-
-    <!--    <h1>Courses List</h1>-->
-    <!--    <a href="/new/course">Add a Course</a>-->
-    <!--    <br/><br/>-->
-    <!--    <table border="1" cellpadding="10">-->
-    <!--        <thead>-->
-    <!--        <tr>-->
-    <!--            <th>Name</th>-->
-    <!--            <th>Area</th>-->
-    <!--            <th>Actions</th>-->
-    <!--        </tr>-->
-    <!--        </thead>-->
-    <!--        <tbody>-->
-    <!--        <tr th:each="course : ${courseList}">-->
-    <!--            <td th:text="${course.name}">Course Name</td>-->
-    <!--            <td th:text="${course.area}">Course Area</td>-->
-    <!--            <td>-->
-    <!--                <a th:href="@{'/edit/course/' + ${course.id}}">Edit</a>-->
-    <!--                <a th:href="@{'/delete/course/' + ${course.id}}">Delete</a>-->
-    <!--            </td>-->
-    <!--        </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
-
-    <!--    <h1>Class List</h1>-->
-    <!--    <a href="/new/class">Add a Class</a>-->
-    <!--    <br/><br/>-->
-    <!--    <table border="1" cellpadding="10">-->
-    <!--        <thead>-->
-    <!--        <tr>-->
-    <!--            <th>Student</th>-->
-    <!--            <th>Professor</th>-->
-    <!--            <th>Date</th>-->
-    <!--            <th>Duration (Min)</th>-->
-    <!--            <th>Value</th>-->
-    <!--            <th>Average</th>-->
-    <!--            <th>Result</th>-->
-    <!--            <th>Actions</th>-->
-    <!--        </tr>-->
-    <!--        </thead>-->
-    <!--        <tbody>-->
-    <!--        <tr th:each="classEntity : ${classList}">-->
-    <!--            <td th:text="${classEntity.student.name}">Student Name</td>-->
-    <!--            <td th:text="${classEntity.professor.name}">Professor Name</td>-->
-    <!--            <td th:text="${#dates.format(classEntity.Date, 'yyyy-MM-dd')}">Class Date</td>-->
-    <!--            <td th:text="${classEntity.Duration}">Class Duration</td>-->
-    <!--            <td th:text="${classEntity.Value}">Student Value</td>-->
-    <!--            <td th:text="${classEntity.Average}">Student Average</td>-->
-    <!--            <td th:text="${classEntity.Result}">Class Result</td>-->
-    <!--            <td>-->
-    <!--                <a th:href="@{'/edit/class/' + ${classEntity.id}}">Edit</a>-->
-    <!--                <a th:href="@{'/delete/class/' + ${classEntity.id}}">Delete</a>-->
-    <!--            </td>-->
-    <!--        </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
 </div>
 </body>
 </html>

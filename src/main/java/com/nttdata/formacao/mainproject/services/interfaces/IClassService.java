@@ -1,7 +1,6 @@
 package com.nttdata.formacao.mainproject.services.interfaces;
 
 import com.nttdata.formacao.mainproject.entities.ClassEntity;
-import com.nttdata.formacao.mainproject.entities.CourseEntity;
 
 import java.util.List;
 

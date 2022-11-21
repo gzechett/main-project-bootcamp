@@ -1,0 +1,1 @@
+INSERT INTO school.user (USERNAME, PASSWORD) VALUES ('user', 'pass');
